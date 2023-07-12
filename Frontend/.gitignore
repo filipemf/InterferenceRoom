@@ -132,3 +132,5 @@ dmypy.json
 lib/
 
 utils/__pycache__/hubconf.cpython-38.pyc
+
+exports/*
