@@ -98,7 +98,7 @@ if not st.session_state.logged_in:
         st.stop()
 
     st.title('Interference Room')
-    sample_img = cv2.imread('final.jpg')
+    sample_img = cv2.imread('final.png')
     FRAME_WINDOW = st.image(sample_img, channels='BGR')
     cap = None
 

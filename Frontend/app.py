@@ -1,3 +1,4 @@
+import datetime
 import streamlit as st
 import cv2
 import torch
@@ -6,54 +7,83 @@ import numpy as np
 import tempfile
 import time
 from collections import Counter
-import json
 import pandas as pd
-from model_utils import get_yolo, color_picker_fn, get_system_stat
-
-p_time = 0
+from model_utils import get_yolo, color_picker_fn, get_system_stat, reset_time
+import requests
+import os
 
 # Set the line color to green
 line_color = (0, 255, 0)
 
-# Initialize counters
-in_counter = 0
-out_counter = 0
+p_time = 0
 
-st.sidebar.title('Settings')
-# Choose the model
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+
+cap = None
+
 model_type = st.sidebar.selectbox(
-    'Choose Model Type', ('Light', 'Medium', 'Heavy')
+    'Choose Model Type', ('Light', 'Medium', 'ONNX-Medium', 'Heavy')
 )
 
 model_paths = {
     'Light': 'algo/yolov7-tiny.pt',
     'Medium': 'algo/yolov7.pt',
-    'ONNX': 'path_to_heavy_model'
+    'ONNX-Medium': 'path_to_heavy_model',
+    'Heavy': 'path_to_heavy_model'
 }
 
-st.title(f'{model_type} Model Predictions')
-sample_img = cv2.imread('logo.jpg')
-FRAME_WINDOW = st.image(sample_img, channels='BGR')
-cap = None
+path_model_file = model_paths[model_type]
 
-if st.sidebar.checkbox('Load Model'):
-    path_model_file = model_paths[model_type]
-    
-    if model_type == 'Light':
-        model = custom(path_or_model=path_model_file)
-    elif model_type == 'Medium':
-        model = custom(path_or_model=path_model_file, gpu=True)
-    elif model_type == 'Heavy':
-        from ultralytics import YOLO
-        model = YOLO(path_model_file)
+if model_type == 'Light':
+    model = custom(path_or_model=path_model_file)
+elif model_type == 'Medium':
+    model = custom(path_or_model=path_model_file, gpu=True)
+elif model_type == 'Heavy':
+    from ultralytics import YOLO
+    model = YOLO(path_model_file)
 
-    # Load Class names
-    class_labels = model.names
+# Load Class names
+class_labels = model.names
 
-    # Inference Mode
-    options = st.sidebar.radio(
-        'Options:', ('Webcam', 'Image', 'Video', 'RTSP'), index=1)
+# Multiselect Component for Model Classes
+selected_classes = st.sidebar.multiselect("Select Classes", class_labels, default=[class_labels[1]], key="model_classes")
 
+# Filter the color_pick_list based on selected_classes
+color_pick_list = []
+for i in range(len(class_labels)):
+    classname = class_labels[i]
+    if classname in selected_classes:
+        color = color_picker_fn(classname, i)
+        color_pick_list.append(color)
+
+
+# Inference Mode
+options = st.sidebar.radio(
+    'Options:', ('Home', 'Webcam', 'Image', 'Video', 'RTSP', 'Reports'), index=0)
+
+
+if options == 'Home':
+    st.markdown("# Home")
+    st.empty()
+    st.markdown('Description: This program loads up a YOLO model and makes predictions on images, videos, web-cam and RTSP streams. You can modify the confidence threshold, draw thickness to suit your needs and filter the desired classes. Also, you can change the model type based on the current machine. If you have a strong enough PC powered by a Nvidea GPU, select a stronger model, if you need to run this program on the CPU, use a lighter model. You may also use the ONNX model, which is optimized for running on the CPU.')
+    st.session_state.finish = False
+
+elif options == 'Reports':
+    st.markdown("# Reports")
+    st.empty()
+        
+else:
+    st.title('Interference Room')
+    sample_img = cv2.imread('final.png')
+    FRAME_WINDOW = st.image(sample_img, channels='BGR')
+    cap = None
     # Confidence
     confidence = st.sidebar.slider(
         'Detection Confidence', min_value=0.0, max_value=1.0, value=0.25)
@@ -63,12 +93,6 @@ if st.sidebar.checkbox('Load Model'):
         'Draw Thickness:', min_value=1,
         max_value=20, value=2
     )
-
-    color_pick_list = []
-    for i in range(len(class_labels)):
-        classname = class_labels[i]
-        color = color_picker_fn(classname, i)
-        color_pick_list.append(color)
 
     # Image
     if options == 'Image':
@@ -82,8 +106,9 @@ if st.sidebar.checkbox('Load Model'):
             FRAME_WINDOW.image(img, channels='BGR')
 
             if pred:
+                
                 img, current_no_class = get_yolo(img, model_type, model, confidence, color_pick_list, class_labels,
-                                                 draw_thick)
+                                                draw_thick)
                 FRAME_WINDOW.image(img, channels='BGR')
 
                 # Current number of classes
@@ -95,6 +120,7 @@ if st.sidebar.checkbox('Load Model'):
                     st.markdown("<h2>Inference Statistics</h2>", unsafe_allow_html=True)
                     st.markdown("<h3>Total Objects</h3>", unsafe_allow_html=True)
                     st.dataframe(df_fq, use_container_width=True)
+                
 
     # Video
     if options == 'Video':
@@ -107,6 +133,7 @@ if st.sidebar.checkbox('Load Model'):
             tfile.write(upload_video_file.read())
             cap = cv2.VideoCapture(tfile.name)
 
+
     # Web-cam
     if options == 'Webcam':
         cam_options = st.sidebar.selectbox('Webcam Channel',
@@ -115,6 +142,7 @@ if st.sidebar.checkbox('Load Model'):
         if not cam_options == 'Select Channel':
             pred = st.checkbox(f'Predict Using {model_type}')
             cap = cv2.VideoCapture(int(cam_options))
+
 
     # RTSP
     if options == 'RTSP':
@@ -125,11 +153,61 @@ if st.sidebar.checkbox('Load Model'):
         pred = st.checkbox(f'Predict Using {model_type}')
         cap = cv2.VideoCapture(rtsp_url)
 
+
+
+dataframe = None
+elapsed_time = None
+save_to_csv = False
+
+def convert_to_csv(dataframe, elapsed_time):
+
+    print(dataframe)
+    print(elapsed_time)
+    # Create a new DataFrame with the values of elapsed time and current date
+    elapsed_time_df = pd.DataFrame({'Elapsed Time': [elapsed_time]})
+    date_df = pd.DataFrame({'Date': [datetime.datetime.now().strftime("%d/%m/%Y")]})
+
+    result_df = pd.concat([elapsed_time_df, date_df, dataframe], axis=1)
+
+    # Create the "exports" folder if it doesn't exist
+    if not os.path.exists('exports'):
+        os.makedirs('exports')
+
+    # Save the DataFrame to a CSV file with the current date and time in Brasilia
+    dt_br = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-3))).strftime("%Y-%m-%d_%H-%M-%S")
+    file_path = os.path.join('exports', f'report_{dt_br}.csv')
+    result_df.to_csv(file_path, index=False)
+
+    st.success("Data has been saved to data.csv")
+    print("Converting to CSV complete")
+
+    st.session_state.in_counter = 0
+    st.session_state.out_counter = 0
+
+    reset_time()
+    
+    st.experimental_rerun()
+
+
+
+
+if 'in_counter' not in st.session_state:
+    st.session_state.in_counter = 0
+    
+
+if 'out_counter' not in st.session_state:
+    st.session_state.out_counter = 0
+
 if cap is not None and pred:
     stframe1 = st.empty()
     stframe2 = st.empty()
     stframe3 = st.empty()
-   
+
+
+    if st.button("Save to CSV", key="save_to_csv"):
+        save_to_csv = True
+        
+
     while True:
         success, img = cap.read()
         if not success:
@@ -145,10 +223,11 @@ if cap is not None and pred:
         cv2.line(img, (line_position, 0), (line_position, height), line_color, 2)
 
         # Add text labels
-        cv2.putText(img, f"In: {in_counter}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
-        cv2.putText(img, f"Out: {out_counter}", (width - 110, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+        cv2.putText(img, f"In: {st.session_state.in_counter}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+        cv2.putText(img, f"Out: {st.session_state.out_counter}", (width - 110, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
 
-        img, current_no_class = get_yolo(img, 'YOLOv7', model, confidence, color_pick_list, class_labels, draw_thick)
+
+        img, current_no_class = get_yolo(img, 'YOLOv7', model, confidence, color_pick_list, selected_classes, draw_thick)
         FRAME_WINDOW.image(img, channels='BGR')
 
         # Check for objects touching the line
@@ -162,9 +241,9 @@ if cap is not None and pred:
                     object_center = (xmin + xmax) // 2
 
                     if object_center < line_position:
-                        out_counter += 1
+                        st.session_state.out_counter += 1
                     elif object_center > line_position:
-                        in_counter += 1
+                        st.session_state.in_counter += 1
 
         # FPS
         c_time = time.time()
@@ -172,12 +251,28 @@ if cap is not None and pred:
         p_time = c_time
 
         # Updating Inference results
-        class_fq = {'In': in_counter, 'Out': out_counter}
+        class_fq = {'In': st.session_state.in_counter, 'Out': st.session_state.out_counter}
         df_fq = pd.DataFrame(class_fq.items(), columns=['Class', 'Number'])
 
         # Display the updated counters
-        cv2.putText(img, f"In: {in_counter}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
-        cv2.putText(img, f"Out: {out_counter}", (width - 110, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+        cv2.putText(img, f"In: {st.session_state.in_counter}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+        cv2.putText(img, f"Out: {st.session_state.out_counter}", (width - 110, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+
+        
 
         # Updating Inference results
-        get_system_stat(stframe1, stframe2, stframe3, fps, df_fq)
+        dataframe, elapsed_time = get_system_stat(stframe1, stframe2, stframe3, fps, df_fq)
+
+        if save_to_csv:
+            
+            print('button abaixo')
+            convert_to_csv(dataframe, elapsed_time)
+            save_to_csv = False
+            break
+
+      
+        
+
+
+
+
