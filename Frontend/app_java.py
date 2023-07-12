@@ -186,6 +186,7 @@ if st.session_state.logged_in == True:
                 FRAME_WINDOW.image(img, channels='BGR')
 
                 if pred:
+                    
                     img, current_no_class = get_yolo(img, model_type, model, confidence, color_pick_list, class_labels,
                                                     draw_thick)
                     FRAME_WINDOW.image(img, channels='BGR')
@@ -199,6 +200,7 @@ if st.session_state.logged_in == True:
                         st.markdown("<h2>Inference Statistics</h2>", unsafe_allow_html=True)
                         st.markdown("<h3>Total Objects</h3>", unsafe_allow_html=True)
                         st.dataframe(df_fq, use_container_width=True)
+                    
 
         # Video
         if options == 'Video':
@@ -211,6 +213,7 @@ if st.session_state.logged_in == True:
                 tfile.write(upload_video_file.read())
                 cap = cv2.VideoCapture(tfile.name)
 
+
         # Web-cam
         if options == 'Webcam':
             cam_options = st.sidebar.selectbox('Webcam Channel',
@@ -219,6 +222,7 @@ if st.session_state.logged_in == True:
             if not cam_options == 'Select Channel':
                 pred = st.checkbox(f'Predict Using {model_type}')
                 cap = cv2.VideoCapture(int(cam_options))
+
 
         # RTSP
         if options == 'RTSP':
