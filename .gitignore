@@ -1,0 +1,178 @@
+# Byte-compiled / optimized / DLL files
+Frontend/__pycache__/
+Frontend/*.py[cod]
+Frontend/*$py.class
+
+# C extensions
+Frontend/*.so
+
+# Distribution / packaging
+Frontend/.Python
+Frontend/build/
+Frontend/develop-eggs/
+Frontend/dist/
+Frontend/downloads/
+Frontend/eggs/
+Frontend/.eggs/
+Frontend/lib/
+Frontend/lib64/
+Frontend/parts/
+Frontend/sdist/
+Frontend/var/
+Frontend/wheels/
+Frontend/pip-wheel-metadata/
+Frontend/share/python-wheels/
+Frontend/*.egg-info/
+Frontend/.installed.cfg
+Frontend/*.egg
+Frontend/MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+Frontend/*.manifest
+Frontend/*.spec
+
+# Installer logs
+Frontend/pip-log.txt
+Frontend/pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+Frontend/htmlcov/
+Frontend/.tox/
+Frontend/.nox/
+Frontend/.coverage
+Frontend/.coverage.*
+Frontend/.cache
+Frontend/nosetests.xml
+Frontend/coverage.xml
+Frontend/*.cover
+Frontend/*.py,cover
+Frontend/.hypothesis/
+Frontend/.pytest_cache/
+
+# Translations
+Frontend/*.mo
+Frontend/*.pot
+
+# Django stuff:
+Frontend/*.log
+Frontend/local_settings.py
+Frontend/db.sqlite3
+Frontend/db.sqlite3-journal
+
+# Flask stuff:
+Frontend/instance/
+Frontend/.webassets-cache
+
+# Scrapy stuff:
+Frontend/.scrapy
+
+# Sphinx documentation
+Frontend/docs/_build/
+
+# PyBuilder
+Frontend/target/
+
+# Jupyter Notebook
+Frontend/.ipynb_checkpoints
+
+# IPython
+Frontend/profile_default/
+Frontend/ipython_config.py
+
+# pyenv
+Frontend/.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Frontend/Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+Frontend/__pypackages__/
+
+# Celery stuff
+Frontend/celerybeat-schedule
+Frontend/celerybeat.pid
+
+# SageMath parsed files
+Frontend/*.sage.py
+
+# Environments
+Frontend/.env
+Frontend/.venv
+Frontend/env/
+Frontend/venv/
+Frontend/ENV/
+Frontend/env.bak/
+Frontend/venv.bak/
+
+# Spyder project settings
+Frontend/.spyderproject
+Frontend/.spyproject
+
+# Rope project settings
+Frontend/.ropeproject
+
+# mkdocs documentation
+Frontend/site
+
+# mypy
+Frontend/.mypy_cache/
+Frontend/.dmypy.json
+Frontend/dmypy.json
+
+# Pyre type checker
+Frontend/.pyre/
+
+# Libraries
+Frontend/lib/
+
+Frontend/utils/__pycache__/hubconf.cpython-38.pyc
+
+Frontend/exports/*
+
+
+
+
+###
+### Java ###
+###
+
+
+Backend/HELP.md
+Backend/target/
+!Backend/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+Backend/.apt_generated
+Backend/.classpath
+Backend/.factorypath
+Backend/.project
+Backend/.settings
+Backend/.springBeans
+Backend/.sts4-cache
+
+### IntelliJ IDEA ###
+Backend/.idea
+Backend/*.iws
+Backend/*.iml
+Backend/*.ipr
+
+### NetBeans ###
+Backend/nbproject/private/
+Backend/nbbuild/
+Backend/dist/
+Backend/nbdist/
+Backend/.nb-gradle/
+Backend/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+Backend/.vscode/
