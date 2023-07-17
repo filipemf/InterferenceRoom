@@ -49,4 +49,4 @@ tqdm==4.64.1
 ultralytics==8.0.125
 util==0.0.1
 wandb==0.15.5
-~pencv_python_headless==4.5.3.56
+opencv_python_headless==4.5.3.56
