@@ -60,16 +60,23 @@ The following tools were used in this project:
 
 :heavy_check_mark: Login and Register
 
+Login screen, where is possible to access the app, if not already have sign-up, you can change to the register option.
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/login.png)
+
+Here is possible to sign up. These two options access the Java API using REST to both login and sign up.
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/register.png)
 
 :heavy_check_mark: Detection
 
+Home screen, where all the avaliable options are displayed.
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/home.png)
+
+After inserting the image source, check the checkbox to start the detection.
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection-on-video.png)
 
 :heavy_check_mark: Exporting to CSV
 
+When you have already finished the desired information, you can export the information to a CSV file.
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection-on-video-2.png)
 
 
