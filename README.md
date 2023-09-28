@@ -50,21 +50,17 @@ This project is based on a professional program developed by Filipe Ferreira. Th
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;\
+:heavy_check_mark: Login and Register
 
-### Login and Register
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/login.png)
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/register.png)
 
-:heavy_check_mark: Feature 2;\
+:heavy_check_mark: Detection
 
-### Detection
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/home.png)
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video.png)
 
-:heavy_check_mark: Feature 3;
-
-### Exporting to CSV
+:heavy_check_mark: Exporting to CSV
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video%25202.png)
 
 
@@ -78,7 +74,7 @@ The following tools were used in this project:
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have [Java](https://git-scm.com), [Python](https://nodejs.org/en/) and PostgresSQL installed.
+Before starting, you need to have [Java](https://git-scm.com), [Python](https://nodejs.org/en/) and [PostgresSQL](https://www.postgresql.org/docs/) installed.
 
 ## :checkered_flag: Starting ##
 
