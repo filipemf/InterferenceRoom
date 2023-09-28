@@ -48,6 +48,14 @@
 
 This project is based on a professional program developed by Filipe Ferreira. This program loads ONNX and YOLOv7 models, have the options to load a video, an image, a webcam video and a live camera video feed. You can change the model from a list, select which elements you want to load, change the confidence score and the detection color. After the detection is loaded, you can detect, count objects and export the elapsed time, the counted objects and framerate to a CSV file.
 
+## :rocket: Technologies ##
+
+The following tools were used in this project:
+
+- [Python](https://expo.io/)
+- [Java](https://nodejs.org/en/)
+- [PostgreSQL](https://pt-br.reactjs.org/)
+
 ## :sparkles: Features ##
 
 :heavy_check_mark: Login and Register
@@ -61,26 +69,19 @@ This project is based on a professional program developed by Filipe Ferreira. Th
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video.png)
 
 :heavy_check_mark: Exporting to CSV
+
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video%25202.png)
 
 
-## :rocket: Technologies ##
-
-The following tools were used in this project:
-
-- [Python](https://expo.io/)
-- [Java](https://nodejs.org/en/)
-- [Postgres](https://pt-br.reactjs.org/)
-
 ## :white_check_mark: Requirements ##
 
-Before starting, you need to have [Java](https://git-scm.com), [Python](https://nodejs.org/en/) and [PostgresSQL](https://www.postgresql.org/docs/) installed.
+Before starting, you need to have [Java](https://git-scm.com), [Python](https://nodejs.org/en/) and [PostgreSQL](https://www.postgresql.org/docs/) installed.
 
 ## :checkered_flag: Starting ##
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/interferenceroom
+$ git clone https://github.com/filipemf/interferenceroom
 
 # Access
 $ cd interferenceroom
