@@ -39,7 +39,7 @@
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+  <a href="https://github.com/filipemf" target="_blank">Author</a>
 </p>
 
 <br>
@@ -52,9 +52,9 @@ This project is based on a professional program developed by Filipe Ferreira. Th
 
 The following tools were used in this project:
 
-- [Python](https://expo.io/)
-- [Java](https://nodejs.org/en/)
-- [PostgreSQL](https://pt-br.reactjs.org/)
+- [Python](https://www.python.org/)
+- [Java](https://www.java.com/en/)
+- [PostgreSQL](https://www.postgresql.org/docs/)
 
 ## :sparkles: Features ##
 
@@ -66,11 +66,11 @@ The following tools were used in this project:
 :heavy_check_mark: Detection
 
 ![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/home.png)
-![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video.png)
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection-on-video.png)
 
 :heavy_check_mark: Exporting to CSV
 
-![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video%25202.png)
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection-on-video-2.png)
 
 
 ## :white_check_mark: Requirements ##
