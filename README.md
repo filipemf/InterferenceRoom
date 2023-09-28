@@ -9,13 +9,13 @@
 <h1 align="center">Interference Room</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{filipemf}}/interferenceroom?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/filipemf/interferenceroom?color=56BEB8">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{filipemf}}/interferenceroom?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/filipemf/interferenceroom?color=56BEB8">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{filipemf}}/interferenceroom?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/filipemf/interferenceroom?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/{{filipemf}}/interferenceroom?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/filipemf/interferenceroom?color=56BEB8">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/interferenceroom?color=56BEB8" /> -->
 
@@ -46,11 +46,17 @@
 
 ## :dart: About ##
 
-Describe your project
+This project is based on a professional program developed by Filipe Ferreira. This program loads ONNX and YOLOv7 models, have the options to load a video, an image, a webcam video and a live camera video feed. You can change the model from a list, select which elements you want to load, change the confidence score and the detection color. After the detection is loaded, you can detect, count objects and export the elapsed time, the counted objects and framerate to a CSV file.
 
 ## :sparkles: Features ##
 
 :heavy_check_mark: Feature 1;\
+
+## Login and Register
+![alt text](file:///assets/login.png)
+![alt text](file:///assets/register.png)
+
+
 :heavy_check_mark: Feature 2;\
 :heavy_check_mark: Feature 3;
 
