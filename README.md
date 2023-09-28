@@ -52,13 +52,21 @@ This project is based on a professional program developed by Filipe Ferreira. Th
 
 :heavy_check_mark: Feature 1;\
 
-## Login and Register
-![alt text](file:///assets/login.png)
-![alt text](file:///assets/register.png)
-
+### Login and Register
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/login.png)
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/register.png)
 
 :heavy_check_mark: Feature 2;\
+
+### Detection
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/home.png)
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video.png)
+
 :heavy_check_mark: Feature 3;
+
+### Exporting to CSV
+![Alt text](https://github.com/filipemf/InterferenceRoom/blob/main/assets/detection%2520on%2520video%25202.png)
+
 
 ## :rocket: Technologies ##
 
